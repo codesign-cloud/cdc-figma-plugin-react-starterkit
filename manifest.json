@@ -1,0 +1,19 @@
+{
+  "name": "CDC Figma Plugin React StarterKit",
+  "id": "0000000000000000000",
+  "api": "1.0.0",
+  "ui": "dist/index.html",
+  "main": "dist/code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figma",
+    "figjam"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  }
+}
