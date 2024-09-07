@@ -17,11 +17,13 @@ type UseFigmaMessageOptions = {
 
 export function useFigmaMessaging(options: UseFigmaMessageOptions = {}) {
 
-    const { targetOrigin = '*', debounceMs = 300 } = options;
+    const { targetOrigin = 'https://www.figma.com', debounceMs = 300 } = options;
     const [isRunningInFigma, setIsRunningInFigma] = useState(false);
 
     useEffect(() => {
-        setIsRunningInFigma(window.parent !== window);
+        const isRunningInFigma = window.parent !== window;
+        setIsRunningInFigma(isRunningInFigma);
+        console.log(`Is running in Figma: ${isRunningInFigma}`);
     }, []);
 
     const sendToFigma = useCallback(
@@ -40,11 +42,6 @@ export function useFigmaMessaging(options: UseFigmaMessageOptions = {}) {
     );
 
     const onFigmaMessage = useCallback((handler: FigmaMessageHandler) => {
-        if (!isRunningInFigma) {
-            console.warn('Not in Figma environment');
-            return () => { };
-        }
-
         const onMessage = (event: MessageEvent) => {
             if (targetOrigin !== '*' && event.origin !== targetOrigin) {
                 return;

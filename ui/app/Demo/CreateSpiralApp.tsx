@@ -11,11 +11,14 @@ export default function CreateSpiralApp() {
 
   const [figmaSelectedNodes, setFigmaSelectedNodes] = useState([0]);
 
-  const { sendToFigma, onFigmaMessage } = useFigmaMessaging();
+  const { sendToFigma, onFigmaMessage } = useFigmaMessaging({
+    targetOrigin: 'https://www.figma.com', // * for local testing, less secure
+    debounceMs: 300, // 300ms debounce to prevent spamming Figma with messages
+  });
 
   const createSpirals = () => {
-    //parent.postMessage({ pluginMessage: { type: 'create-spiral', count, shape } }, '*');
     sendToFigma({ type: 'create-spiral', count, shape });
+    // Equivalent to: parent.postMessage({ pluginMessage: { type: 'create-spiral', count, shape } }, '*');
   };
 
   useEffect(() => {
