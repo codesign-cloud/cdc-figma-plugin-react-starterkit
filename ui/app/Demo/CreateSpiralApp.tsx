@@ -1,25 +1,41 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateSpiralApp.css';
+import { useFigmaMessaging } from '../hooks/useFigmaMessaging';
 
 export default function CreateSpiralApp() {
 
   const [count, setCount] = useState(120);
   const [shape, setShape] = useState<'circle' | 'rectangle' | 'polygon'>('polygon');
 
-  const onCreate = () => {
-    parent.postMessage({ pluginMessage: { type: 'create-spiral', count, shape } }, '*');
+  const [figmaSelectedNodes, setFigmaSelectedNodes] = useState([0]);
+
+  const { sendToFigma, onFigmaMessage } = useFigmaMessaging();
+
+  const createSpirals = () => {
+    //parent.postMessage({ pluginMessage: { type: 'create-spiral', count, shape } }, '*');
+    sendToFigma({ type: 'create-spiral', count, shape });
   };
 
-  React.useEffect(() => {
-    window.onmessage = (event) => {
-      const { type, message } = event.data.pluginMessage;
-      if (type === 'create-spiral') {
-        console.log(`Figma Says: ${message}`);
+  useEffect(() => {
+    const removeMessageListener = onFigmaMessage((m) => {
+      switch (m.type) {
+        case 'selectionchange':
+          console.log(`Figma says: ${m.message}`);
+          console.log(`Figma payload: ${JSON.stringify(m.data??{})}`);
+          setFigmaSelectedNodes(m.data?.nodeCount??0);
+          break;
+        case 'create-spiral':
+          console.log(`Figma says: ${m.message}`);
+          break;
+        default:
+          console.log(`Unknown message type received from Figma: ${m.type}`);
       }
-    };
-  }, []);
+    });
+
+    return removeMessageListener;
+  }, [onFigmaMessage]);
 
   return (
     <div className="container">
@@ -56,9 +72,13 @@ export default function CreateSpiralApp() {
       </table>
       <div>
         <br />
-        <button className="button button--primary" onClick={onCreate}>
+        <button className="button button--primary" onClick={createSpirals}>
           Create shape-spiral
         </button>
+      </div>
+      <div className="information">
+        <br />
+        <p>Nodes selected in Figma: {figmaSelectedNodes}</p>
       </div>
     </div>
   );

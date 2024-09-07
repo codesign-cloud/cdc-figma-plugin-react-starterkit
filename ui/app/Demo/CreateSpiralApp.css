@@ -95,3 +95,10 @@ button:focus {
 .table td {
     padding-bottom: var(--padding);
 }
+
+.information {
+    width: 100%;
+    padding-top: 16px;
+    text-align: left;
+    color: #AAA;
+}
