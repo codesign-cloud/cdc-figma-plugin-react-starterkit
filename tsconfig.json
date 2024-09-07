@@ -3,6 +3,10 @@
         "target": "es6",
         "outDir": "dist",
         "jsx": "react",
+        "esModuleInterop": true,
+        "lib": ["dom","dom.iterable","esnext"],
+        "module": "esnext",
+        "moduleResolution": "node",
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
@@ -10,10 +14,13 @@
         "allowSyntheticDefaultImports": true,
         "removeComments": true,
         "noImplicitAny": true,
-        "moduleResolution": "node",
         "typeRoots": [
             "./node_modules/@types",
             "./node_modules/@figma"
         ]
-    }
+    },
+    "include": [
+        "ui/**/*",
+        "plugin/**/*"
+    ]
 }

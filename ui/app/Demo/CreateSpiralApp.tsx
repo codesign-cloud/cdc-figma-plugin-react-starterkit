@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import './App.css';
+import './CreateSpiralApp.css';
 
-function App() {
+export default function CreateSpiralApp() {
 
   const [count, setCount] = useState(120);
   const [shape, setShape] = useState<'circle' | 'rectangle' | 'polygon'>('polygon');
@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="container">
-      <h2>Spiral Generator</h2>
+      <h2>Spiral Generator<h2>
       <p>Create a colorful spiral with a customizable count and shape.</p>
       <table className="table">
         <tbody>
@@ -63,5 +63,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
