@@ -23,7 +23,7 @@ export default function CreateSpiralApp() {
 
   return (
     <div className="container">
-      <h2>Spiral Generator<h2>
+      <h2>Spiral Generator</h2>
       <p>Create a colorful spiral with a customizable count and shape.</p>
       <table className="table">
         <tbody>
