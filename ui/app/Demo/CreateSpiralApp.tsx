@@ -46,7 +46,9 @@ export default function CreateSpiralApp() {
                 title="Count"
                 type="number"
                 value={count}
-                onChange={(e) => setCount(Math.max(1, parseInt(e.target.value) || 1))}
+                min="1"
+                max="500"
+                onChange={(e) => setCount(Math.max(1, Math.min(500, parseInt(e.target.value) || 1)))}
               />
             </td>
           </tr>
