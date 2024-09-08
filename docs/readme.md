@@ -38,8 +38,6 @@ Code updates are dynamically reflected through hot-reload
 
 ![Image](assets/figma-plugin-dev-hotreload.png)
 
-Ciao!
-
 <!-- tabs:end -->
 
 
