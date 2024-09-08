@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Docs - CDC Figma Plugin React Starter Kit</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Documentation for CDC Figma Plugin React Starter Kit">
+    <link rel="icon" type="image/x-icon" href="./images/icon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!-- Theme -->
+    <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+    <!--<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">-->
+</head>
+
+<body>
+    <div id="docs-app"></div>
+    <script>
+        window.$docsify = {
+            name: 'CDC Figma Plugin React Starter Kit',
+            logo: './images/icon.png',
+            //basePath: '/docs/',
+            //repo: '',
+            el: '#docs-app',
+            themeColor: '#f00',
+            loadSidebar: '_sidebar.md',
+            homepage: 'readme.md',
+            maxLevel: 3,
+            coverpage: false,
+        }
+    </script>
+    <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+    <!-- Plugin: Image Zoom -->
+    <script src="//unpkg.com/docsify/lib/plugins/zoom-image.min.js"></script>
+    <!-- Plugin: Tabs -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+</body>
+
+<!-- Style overrides -->
+<style type="text/css">
+    .sidebar img {
+        max-width: 128px;
+        margin: 0 auto;
+    }
+
+    #main img { 
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        box-shadow: 2px 2px 12px rgba(128,0,128,0.125);
+    }
+
+    .docsify-tabs__tab {
+        cursor: pointer
+    }
+
+    .docsify-tabs__tab--active {
+        appearance: none;
+        border: 0
+    }
+
+    .content {
+        max-width: 1400px;
+    }
+</style>
+
+</body>
+
+</html>
