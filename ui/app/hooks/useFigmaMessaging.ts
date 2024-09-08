@@ -10,8 +10,17 @@ export type FigmaMessage<T = unknown | any> = {
 
 type FigmaMessageHandler = (message: FigmaMessage) => void;
 
-type UseFigmaMessageOptions = {
+export type UseFigmaMessageOptions = {
+    /**
+     * The target origin for postMessage. 
+     * Defaults to 'https://www.figma.com'.
+     * Use '*' for local testing, but be aware it's less secure.
+     */
     targetOrigin?: string;
+    /**
+     * The debounce time in milliseconds for sending messages to Figma.
+     * Defaults to 300ms to prevent spamming Figma with messages.
+     */
     debounceMs?: number;
 };
 

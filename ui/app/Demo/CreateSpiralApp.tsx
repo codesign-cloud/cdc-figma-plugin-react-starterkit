@@ -9,8 +9,6 @@ export default function CreateSpiralApp() {
   const [count, setCount] = useState(120);
   const [shape, setShape] = useState<'circle' | 'rectangle' | 'polygon'>('polygon');
 
-  const [figmaSelectedNodes, setFigmaSelectedNodes] = useState([0]);
-
   const { sendToFigma, onFigmaMessage } = useFigmaMessaging({
     targetOrigin: 'https://www.figma.com', // * for local testing, less secure
     debounceMs: 300, // 300ms debounce to prevent spamming Figma with messages
@@ -24,11 +22,6 @@ export default function CreateSpiralApp() {
   useEffect(() => {
     const removeMessageListener = onFigmaMessage((m) => {
       switch (m.type) {
-        case 'selectionchange':
-          console.log(`Figma says: ${m.message}`);
-          console.log(`Figma payload: ${JSON.stringify(m.data??{})}`);
-          setFigmaSelectedNodes(m.data?.nodeCount??0);
-          break;
         case 'create-spiral':
           console.log(`Figma says: ${m.message}`);
           break;
@@ -41,7 +34,7 @@ export default function CreateSpiralApp() {
   }, [onFigmaMessage]);
 
   return (
-    <div className="container">
+    <div>
       <h2>Spiral Generator</h2>
       <p>Create a colorful spiral with a customizable count and shape.</p>
       <table className="table">
@@ -78,10 +71,6 @@ export default function CreateSpiralApp() {
         <button className="button button--primary" onClick={createSpirals}>
           Create shape-spiral
         </button>
-      </div>
-      <div className="information">
-        <br />
-        <p>Nodes selected in Figma: {figmaSelectedNodes}</p>
       </div>
     </div>
   );

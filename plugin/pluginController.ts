@@ -1,5 +1,9 @@
-import { PLUGIN_UI_HEIGHT, PLUGIN_UI_WIDTH } from './config';
 
+/* Config */
+import { PLUGIN_UI_HEIGHT, PLUGIN_UI_WIDTH } from './config';
+/* Helpers */
+import { roundToDecimals } from './helpers/helpers';
+/* Demo */
 import { createColorfulSpiral } from './demo/spiralGenerator';
 
 figma.showUI(__html__, { width: PLUGIN_UI_WIDTH, height: PLUGIN_UI_HEIGHT });
@@ -25,20 +29,28 @@ figma.ui.onmessage = (msg) => {
   }
 };
 
-// on select of  any object in figma, the plugin UI should show the number of nodes and their types and names 
+// When any object is selected in Figma, it updates the plugin UI to display the number of selected nodes,
+// along with their meta data.
 figma.on('selectionchange', () => {
   const selection = figma.currentPage.selection;
   const nodeCount = selection.length;
-  const nodeTypes = [...new Set(selection.map(node => node.type))];
-  const nodeNames = selection.map(node => node.name);
+  const nodeData = selection.map(node => ({
+    id: node.id,
+    type: node.type,
+    name: node.name,
+    width: roundToDecimals(node.width),
+    height: roundToDecimals(node.height),
+    x: roundToDecimals(node.x,3),
+    y: roundToDecimals(node.y, 3),
+    rotation: 'rotation' in node ? roundToDecimals(node.rotation) : undefined,
+    opacity: 'opacity' in node ? roundToDecimals(node.opacity) : undefined,
+  }));
   figma.ui.postMessage({
     type: 'selectionchange',
     message: `Selected ${nodeCount} nodes`,
     data: {
-      selection: selection,
-      nodeCount: nodeCount,
-      nodeTypes: nodeTypes,
-      nodeNames: nodeNames,
+      count: nodeCount,
+      selection: nodeData,
     }
   });
 });
