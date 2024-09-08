@@ -1,12 +1,12 @@
 
 /* Config */
-import { PLUGIN_UI_HEIGHT, PLUGIN_UI_WIDTH } from './config';
+import { PLUGIN_UI_CONFIG as UiConfig } from './config';
 /* Helpers */
 import { notifyConfigDefault, roundToDecimals } from './helpers/helpers';
 /* Demo */
 import { createColorfulSpiral } from './demo/spiralGenerator';
 
-figma.showUI(__html__, { width: PLUGIN_UI_WIDTH, height: PLUGIN_UI_HEIGHT });
+figma.showUI(__html__, { width: UiConfig.width, height: UiConfig.height });
 
 figma.ui.onmessage = (msg) => {
   switch (msg.type) {
