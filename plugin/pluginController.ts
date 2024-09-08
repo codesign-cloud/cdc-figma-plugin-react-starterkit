@@ -2,7 +2,7 @@
 /* Config */
 import { PLUGIN_UI_HEIGHT, PLUGIN_UI_WIDTH } from './config';
 /* Helpers */
-import { roundToDecimals } from './helpers/helpers';
+import { notifyConfigDefault, roundToDecimals } from './helpers/helpers';
 /* Demo */
 import { createColorfulSpiral } from './demo/spiralGenerator';
 
@@ -12,8 +12,8 @@ figma.ui.onmessage = (msg) => {
   switch (msg.type) {
 
     default:
-      console.error('Unknown message type:', msg.type);
-      alert(`Unknown message type: ${msg.type}`);
+      console.error('Received unknown message type:', msg.type);
+      alert(`Received unknown message type: ${msg.type}`);
       break;
 
     case 'create-spiral':
@@ -24,6 +24,13 @@ figma.ui.onmessage = (msg) => {
         type: 'create-spiral',
         message: `Created a spiral with ${msg.count} ${msg.shape}s`,
       });
+      figma.notify("Figma: Created spiral", notifyConfigDefault);
+      break;
+
+      case 'show-notification':
+      if(msg.message) {
+        figma.notify(msg.message, notifyConfigDefault);
+      }
       break;
 
   }
@@ -31,6 +38,7 @@ figma.ui.onmessage = (msg) => {
 
 // When any object is selected in Figma, it updates the plugin UI to display the number of selected nodes,
 // along with their meta data.
+// DOCS: https://www.figma.com/plugin-docs/api/properties/figma-on/
 figma.on('selectionchange', () => {
   const selection = figma.currentPage.selection;
   const nodeCount = selection.length;

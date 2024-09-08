@@ -24,6 +24,7 @@ export default function CreateSpiralApp() {
       switch (m.type) {
         case 'create-spiral':
           console.log(`Figma says: ${m.message}`);
+          sendToFigma({ type:'show-notification', message: "Plugin: Figma said spirals have been created"})
           break;
         default:
           console.log(`Unknown message type received from Figma: ${m.type}`);
