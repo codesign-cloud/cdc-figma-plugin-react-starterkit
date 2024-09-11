@@ -1,3 +1,5 @@
+# Deploy the Docs folder to GH pages
+
 name: "Deploy Docs to GH Pages"
 
 on:
@@ -29,7 +31,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload just the Docs folder from the repo.
           path: './docs/'
       - name: Deploy to GitHub Pages
         id: deployment

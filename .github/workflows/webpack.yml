@@ -1,3 +1,5 @@
+# Validate build compatibility across different Node.js versions
+
 name: "Build on Node.js with Webpack"
 
 on:
