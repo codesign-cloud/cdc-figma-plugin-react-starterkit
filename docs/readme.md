@@ -36,9 +36,16 @@ To run the plugin by clicking on its name from the list. This will launch the pl
 
 Code updates are dynamically reflected through hot-reload
 
-![Image](assets/figma-plugin-dev-hotreload.png)
+![Hot-reloading](assets/figma-plugin-dev-hotreload.png)
 
 <!-- tabs:end -->
+
+##### Debugging: Using the dev. console
+ The development console in the Figma plugin environment (same as bringing up the dev console on Chrome) can come handy to log info during development. 
+
+ To bring it up: Right click on an open file, goto Plugins, Development, and "Show/Hide console" to toggle it. 
+
+![Figma Dev Console](assets/figma-plugin-dev-console.png)
 
 
  ## Folder Structure
