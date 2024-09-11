@@ -1,0 +1,23 @@
+.sidebar img {
+    max-width: 128px;
+    margin: 0 auto;
+}
+
+#main img {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 12px rgba(128, 0, 128, 0.125);
+}
+
+.docsify-tabs__tab {
+    cursor: pointer
+}
+
+.docsify-tabs__tab--active {
+    appearance: none;
+    border: 0
+}
+
+.content {
+    max-width: 1400px;
+}
