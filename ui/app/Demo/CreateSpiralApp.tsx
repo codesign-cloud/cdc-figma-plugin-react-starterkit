@@ -71,7 +71,7 @@ export default function CreateSpiralApp() {
       </table>
       <div>
         <br />
-        <button className="button button--primary" onClick={createSpirals}>
+        <button className="button button--primary" onClick={createSpirals} type="button">
           Create shape-spiral
         </button>
       </div>

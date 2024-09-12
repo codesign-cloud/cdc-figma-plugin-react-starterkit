@@ -30,7 +30,7 @@ export default function SelectionChanges() {
 
 
     return(
-        <div className="information">
+        <div>
             <p>Nodes selected in Figma: {figmaSelectedNodes}</p>
         </div>
     );
