@@ -1,5 +1,5 @@
 
 export const PLUGIN_UI_CONFIG = {
     width: 400,
-    height: 520,
+    height: 500,
 };

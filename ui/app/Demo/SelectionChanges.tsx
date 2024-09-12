@@ -31,7 +31,7 @@ export default function SelectionChanges() {
 
     return(
         <div>
-            <p>Nodes selected in Figma: {figmaSelectedNodes}</p>
+            <p style={{padding:0, margin:0}}>Nodes selected in Figma: {figmaSelectedNodes}</p>
         </div>
     );
   
