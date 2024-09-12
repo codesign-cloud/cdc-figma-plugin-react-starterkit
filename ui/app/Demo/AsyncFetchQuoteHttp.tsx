@@ -32,7 +32,7 @@ export default function AsyncFetchQuoteHttp() {
 
     return (
         <div>
-            <p>Retrieves a random quote from dummyjson.com and inserts it into Figma</p>
+            <p>Retrieves a random quote from <a rel="external nofollow noopener" href="https://dummyjson.com/quotes/" target="_blank">dummyjson.com</a> and inserts it into Figma</p>
             <button onClick={fetchQuote} type="button" disabled={isLoading}>
                 {isLoading ? 'Fetching...' : 'Fetch and insert'}
             </button>

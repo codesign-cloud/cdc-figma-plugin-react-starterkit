@@ -37,11 +37,20 @@ hr {
     display: block;
 }
 
-h2, h4, h5 {
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+h2, h5 {
     margin: 0 0 8px;
     padding: 0;
 }
-h5 { font-size: 0.86rem; }
+
+h5 {
+    font-size: 0.86rem;
+}
+
 p {
     margin: 0 0 16px;
     padding: 0;
@@ -79,6 +88,7 @@ button:disabled {
     cursor: not-allowed;
     box-shadow: none;
 }
+
 button:disabled:hover {
     box-shadow: none;
 }
