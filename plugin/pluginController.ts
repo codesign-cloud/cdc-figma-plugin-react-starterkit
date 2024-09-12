@@ -23,7 +23,10 @@ figma.ui.onmessage = (msg) => {
       break;
     case 'demo-insert-quote':
       let quote = msg.quote ?? '';
+      const viewportCenter = figma.viewport.center;
       let textNode = figma.createText();
+      textNode.x = viewportCenter.x;
+      textNode.y = viewportCenter.y;
       figma.viewport.scrollAndZoomIntoView([textNode]);
       /* Load font async */
       figma.loadFontAsync({ family: "Inter", style: "Regular" })
