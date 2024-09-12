@@ -17,7 +17,7 @@ export default function AsyncFetchQuoteHttp() {
 
     const fetchQuote = async () => {
         setIsLoading(true);
-        try {            
+        try {
             const response = await axiosClient.get('https://dummyjson.com/quotes/random');
             const data = response.data;
             const randomQuote = data.quote + ' - ' + data.author;
@@ -32,11 +32,14 @@ export default function AsyncFetchQuoteHttp() {
 
     return (
         <div>
-            <p>Retrieves a random quote from <a rel="external nofollow noopener" href="https://dummyjson.com/quotes/" target="_blank">dummyjson.com</a> and inserts it into Figma</p>
-            <button onClick={fetchQuote} type="button" disabled={isLoading}>
+            <h3 className="text-xl font-bold">Fetch quote via HTTP</h3>
+            <p className="text-xs text-gray-500 pt-0 pb-2">Retrieves a random quote from <a className='text-blue-400' rel="external nofollow noopener" href="https://dummyjson.com/quotes/" target="_blank">dummyjson.com</a> and inserts it into Figma</p>
+            <button onClick={fetchQuote} type="button" disabled={isLoading} className={`text-sm text-white py-1 px-3 rounded-sm ${isLoading ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-700'}`}>
                 {isLoading ? 'Fetching...' : 'Fetch and insert'}
             </button>
-            <blockquote>{quote}</blockquote>
+            { quote &&
+                <blockquote className="text-gray-500 mt-3 text-sm border-l-4 border-blue-500 pl-4 py-2 rounded-lg">{quote}</blockquote>
+            }
         </div>
     );
 }

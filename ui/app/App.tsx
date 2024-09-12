@@ -6,21 +6,19 @@ import AsyncFetchQuoteHttp from "./Demo/AsyncFetchQuoteHttp";
 
 export default function App() {
   return (
-    <div className="container">
+    <div className="px-4 py-3 bg-gray-100 h-full w-full">
       {/* Edit here to get started */}
       <>
-      {/* DEMO */}
-      {/* Create Spiral App */}
-      <CreateSpiralApp />
-      <hr />
-      {/* Selection Changes */}
-      <h5>Inter-process communication</h5>
-      <SelectionChanges />
-      <hr />
-      {/* Async */}
-      <h5>Async</h5>
-      <AsyncFetchQuoteHttp />
-      {/* /DEMO */}
+        {/* ===== DEMO ===== */}
+        {/* Create Spiral App */}
+        <CreateSpiralApp />
+        <hr className="my-3" />
+        {/* Selection Changes */}
+        <SelectionChanges />
+        <hr className="my-3" />
+        {/* Async Quote Fetcher*/}
+        <AsyncFetchQuoteHttp />
+        {/* ===== DEMO ===== */}
       </>
     </div>
   );

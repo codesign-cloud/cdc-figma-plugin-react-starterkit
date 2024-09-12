@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import './CreateSpiralApp.css';
+import './Demo.css';
 import { useFigmaMessaging } from '../hooks/useFigmaMessaging';
 
 export default function CreateSpiralApp() {
@@ -35,13 +35,13 @@ export default function CreateSpiralApp() {
   }, [onFigmaMessage]);
 
   return (
-    <div>
-      <h2>Spiral Generator</h2>
-      <p>Create a colorful spiral with a customizable count and shape.</p>
+    <div className='text-sm'>
+      <h3 className="text-xl font-bold">Spiral Generator</h3>
+      <p className="text-xs text-gray-500 pt-0 pb-4">Create a colorful spiral with a customizable count and shape.</p>
       <table className="table">
         <tbody>
-          <tr className="field">
-            <td><label>Count: </label></td>
+          <tr>
+            <td><label className="text-gray-500 text-sm">Count</label></td>
             <td>
               <input
                 title="Count"
@@ -50,16 +50,18 @@ export default function CreateSpiralApp() {
                 min="1"
                 max="500"
                 onChange={(e) => setCount(Math.max(1, Math.min(500, parseInt(e.target.value) || 1)))}
+                className="text-md w-full p-1 rounded-md"
               />
             </td>
           </tr>
-          <tr className="field">
-            <td><label>Shape: </label></td>
+          <tr>
+            <td><label className="text-gray-500 text-sm">Shape</label></td>
             <td>
               <select
                 title="Shape"
                 value={shape}
                 onChange={(e) => setShape(e.target.value as any)}
+                className="text-md w-full p-1 rounded-md"
               >
                 <option value="circle">Circle</option>
                 <option value="rectangle">Rectangle</option>
@@ -69,9 +71,8 @@ export default function CreateSpiralApp() {
           </tr>
         </tbody>
       </table>
-      <div>
-        <br />
-        <button className="button button--primary" onClick={createSpirals} type="button">
+      <div className='mt-2'>
+        <button className="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-3 rounded-sm" onClick={createSpirals} type="button">
           Create shape-spiral
         </button>
       </div>

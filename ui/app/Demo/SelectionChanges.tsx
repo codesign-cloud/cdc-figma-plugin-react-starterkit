@@ -28,11 +28,11 @@ export default function SelectionChanges() {
         return removeMessageListener;
     }, [onFigmaMessage]);
 
-
     return(
         <div>
-            <p style={{padding:0, margin:0}}>Nodes selected in Figma: {figmaSelectedNodes}</p>
+            <h3 className="text-xl font-bold">Inter-process communication</h3>
+            <p className='text-xs text-gray-500'>Nodes selected in Figma: {figmaSelectedNodes}</p>
         </div>
     );
-  
+
 }
