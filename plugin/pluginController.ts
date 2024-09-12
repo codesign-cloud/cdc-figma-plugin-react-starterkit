@@ -1,4 +1,3 @@
-
 /* Config */
 import { PLUGIN_UI_CONFIG as UiConfig } from './config';
 /* Helpers */
@@ -16,6 +15,7 @@ figma.ui.onmessage = (msg) => {
       alert(`Received unknown message type: ${msg.type}`);
       break;
 
+    /* DEMO */
     case 'create-spiral':
       const nodes = createColorfulSpiral(msg.count, msg.shape);
       figma.currentPage.selection = nodes;
@@ -26,13 +26,32 @@ figma.ui.onmessage = (msg) => {
       });
       figma.notify("Figma: Created spiral", notifyConfigDefault);
       break;
+    case 'demo-insert-quote':
+      let quote = msg.quote ?? '';
+      let textNode = figma.createText();
+      figma.viewport.scrollAndZoomIntoView([textNode]);
+      /* Load font async */
+      figma.loadFontAsync({ family: "Inter", style: "Regular" })
+        .then(() => {
+          textNode.characters = quote;
+          textNode.resize(370, textNode.height);
+          textNode.textAutoResize = "HEIGHT";
+          figma.currentPage.appendChild(textNode);
+          figma.currentPage.selection = [textNode];
+          figma.viewport.scrollAndZoomIntoView([textNode]);
+          figma.notify("Figma: Inserted quote", notifyConfigDefault);
+        })
+        .catch(err => {
+          console.error("Failed to load font:", err);
+          figma.notify("Error: Failed to load font async", { error: true });
+        });
+      break;
 
-      case 'show-notification':
-      if(msg.message) {
+    case 'show-notification':
+      if (msg.message) {
         figma.notify(msg.message, notifyConfigDefault);
       }
       break;
-
   }
 };
 
@@ -48,7 +67,7 @@ figma.on('selectionchange', () => {
     name: node.name,
     width: roundToDecimals(node.width),
     height: roundToDecimals(node.height),
-    x: roundToDecimals(node.x,3),
+    x: roundToDecimals(node.x, 3),
     y: roundToDecimals(node.y, 3),
     rotation: 'rotation' in node ? roundToDecimals(node.rotation) : undefined,
     opacity: 'opacity' in node ? roundToDecimals(node.opacity) : undefined,
