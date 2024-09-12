@@ -3,6 +3,7 @@ const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const path = require('path');
 
 module.exports = (env, argv) => {
+
   const isProduction = argv.mode === 'production';
 
   return {
@@ -22,7 +23,14 @@ module.exports = (env, argv) => {
         { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
 
         // Enables including CSS by doing "import './file.css'" in your TypeScript code
-        { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+        {
+          test: /\.css$/,
+          use: [
+            'style-loader',   // Injects <style>s into the DOM
+            'css-loader',     // Translates CSS into js-consumable format
+            'postcss-loader', // Processes CSS with PostCSS
+          ]
+        },
 
         // Allows you to use "<%= require('./file.svg') %>" in your HTML code to get a data URI
         { test: /\.(png|jpg|gif|webp|svg)$/, use: 'url-loader' },
