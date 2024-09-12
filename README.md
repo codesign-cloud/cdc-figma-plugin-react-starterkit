@@ -5,4 +5,4 @@ A starter kit for building Figma plugins with React & TypeScript. Includes boile
 
 Docs: [Getting started](https://github.com/codesign-cloud/cdc-figma-plugin-react-starterkit/blob/main/docs/readme.md)
 
-![Screenshot](assets/demo.screenshot.png)
+![Plugin Screenshot](docs/assets/screenshot.png)
