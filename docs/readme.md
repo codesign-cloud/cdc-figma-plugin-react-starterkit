@@ -48,6 +48,19 @@ Code updates are dynamically reflected through hot-reload
 ![Figma Dev Console](assets/figma-plugin-dev-console.png)
 
 
+##### Making HTTP requests
+
+This project includes Axios to make HTTP calls from the React UI App. Use the pre-configured Axios client from `ui/app/utils/axiosClient.ts` to make requests.
+
+Remember to add any new domains you want to make requests to in the `manifest.json` file under `networkAccess.allowedDomains`.
+
+
+
+
+
+
+
+
  ## Folder Structure
 
 - The `/ui` directory contains the React code for the plugin's user interface.
