@@ -1,5 +1,5 @@
 
-export  function createColorfulSpiral(count: number, shape: 'circle' | 'rectangle' | 'polygon') {
+export function createColorfulSpiral(count: number, shape: 'circle' | 'rectangle' | 'polygon') {
     const nodes = [];
     const centerX = figma.viewport.center.x;
     const centerY = figma.viewport.center.y;

@@ -15,14 +15,14 @@ export default function CreateSpiralApp() {
   });
 
   const createSpirals = () => {
-    sendToFigma({ type: 'create-spiral', count, shape });
-    // Equivalent to: parent.postMessage({ pluginMessage: { type: 'create-spiral', count, shape } }, '*');
+    sendToFigma({ type: 'demo-create-spiral', count, shape });
+    // Equivalent to: parent.postMessage({ pluginMessage: { type: 'demo-create-spiral', count, shape } }, '*');
   };
 
   useEffect(() => {
     const removeMessageListener = onFigmaMessage((m) => {
       switch (m.type) {
-        case 'create-spiral':
+        case 'demo-create-spiral':
           console.log(`Figma says: ${m.message}`);
           sendToFigma({ type:'show-notification', message: "Plugin: Figma said spirals have been created"})
           break;

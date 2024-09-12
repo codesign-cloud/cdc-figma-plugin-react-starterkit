@@ -6,6 +6,7 @@ import { useFigmaMessaging } from '../hooks/useFigmaMessaging';
 import axiosClient from '../utils/axiosClient';
 
 export default function AsyncFetchQuoteHttp() {
+
     const [isLoading, setIsLoading] = useState(false);
     const [quote, setQuote] = useState('');
 
@@ -31,7 +32,7 @@ export default function AsyncFetchQuoteHttp() {
 
     return (
         <div>
-            <p>Fetches a random quote asynchronously from dummyjson.com and inserts it to Figma</p>
+            <p>Retrieves a random quote from dummyjson.com and inserts it into Figma</p>
             <button onClick={fetchQuote} type="button" disabled={isLoading}>
                 {isLoading ? 'Fetching...' : 'Fetch and insert'}
             </button>

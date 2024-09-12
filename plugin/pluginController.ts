@@ -10,18 +10,13 @@ figma.showUI(__html__, { width: UiConfig.width, height: UiConfig.height });
 figma.ui.onmessage = (msg) => {
   switch (msg.type) {
 
-    default:
-      console.error('Received unknown message type:', msg.type);
-      alert(`Received unknown message type: ${msg.type}`);
-      break;
-
     /* DEMO */
-    case 'create-spiral':
+    case 'demo-create-spiral':
       const nodes = createColorfulSpiral(msg.count, msg.shape);
       figma.currentPage.selection = nodes;
       figma.viewport.scrollAndZoomIntoView(nodes);
       figma.ui.postMessage({
-        type: 'create-spiral',
+        type: 'demo-create-spiral',
         message: `Created a spiral with ${msg.count} ${msg.shape}s`,
       });
       figma.notify("Figma: Created spiral", notifyConfigDefault);
@@ -46,12 +41,19 @@ figma.ui.onmessage = (msg) => {
           figma.notify("Error: Failed to load font async", { error: true });
         });
       break;
+    /* /DEMO */
 
     case 'show-notification':
       if (msg.message) {
         figma.notify(msg.message, notifyConfigDefault);
       }
       break;
+
+    default:
+      console.error('Received unknown message type:', msg.type);
+      alert(`Received unknown message type: ${msg.type}`);
+      break;
+
   }
 };
 
