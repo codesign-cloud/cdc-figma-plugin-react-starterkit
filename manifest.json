@@ -13,7 +13,8 @@
   ],
   "networkAccess": {
     "allowedDomains": [
-      "none"
+      "https://dummyjson.com",
+      "https://www.figma.com"
     ]
   }
 }
