@@ -12,7 +12,7 @@ type FigmaMessageHandler = (message: FigmaMessage) => void;
 
 export type UseFigmaMessageOptions = {
     /**
-     * The target origin for postMessage. 
+     * The target origin for postMessage.
      * Defaults to 'https://www.figma.com'.
      * Use '*' for local testing, but be aware it's less secure.
      */

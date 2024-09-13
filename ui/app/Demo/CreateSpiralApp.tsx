@@ -15,7 +15,7 @@ export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message
 
   return (
     <div className='text-sm'>
-      <h3 className="text-xl font-bold">Spiral Generator</h3>
+      <h3 className="text-md font-bold">Spiral Generator</h3>
       <p className="text-xs text-gray-500 pt-0 pb-4">Create a colorful spiral with a customizable count and shape.</p>
       <table className="table">
         <tbody>

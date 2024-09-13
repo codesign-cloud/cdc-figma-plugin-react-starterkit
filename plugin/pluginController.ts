@@ -69,6 +69,7 @@ figma.ui.onmessage = (msg) => {
           return getChildrenRecursively(frame).slice(1); // Exclude the frame itself
         });
       console.log(frameContents);
+      figma.notify("Figma: Selection contents sent. Check console for details.");
       figma.ui.postMessage({
         type: 'get-selection-contents-deep',
         origin: 'figma',

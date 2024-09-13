@@ -24,8 +24,8 @@ export default function AsyncFetchQuoteHttp({ sendToFigma }: { sendToFigma: (mes
 
     return (
         <div>
-            <h3 className="text-xl font-bold">Fetch quote via HTTP</h3>
-            <p className="text-xs text-gray-500 pt-0 pb-2">Retrieves a random quote from <a className='text-blue-400' rel="external nofollow noopener" href="https://dummyjson.com/quotes/" target="_blank">dummyjson.com</a> and inserts it into Figma</p>
+            <h3 className="text-md font-bold">Fetch quote via HTTP</h3>
+            <p className="text-xs text-gray-500 pt-0 pb-2">Retrieves a random quote asynchronously from <a className='text-blue-400' rel="external nofollow noopener" href="https://dummyjson.com/quotes/" target="_blank">dummyjson.com</a> and inserts it into Figma</p>
             <button onClick={fetchQuote} type="button" disabled={isLoading} className={`text-sm text-white py-1 px-3 rounded-sm ${isLoading ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-700'}`}>
                 {isLoading ? 'Fetching...' : 'Fetch and insert'}
             </button>
