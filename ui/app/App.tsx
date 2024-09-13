@@ -11,7 +11,7 @@ export default function App() {
   const [figmaSelNodeCount, setFigmaSelNodeCount] = useState(0);
 
   const { onFigmaMessage, sendToFigma } = useFigmaMessaging({
-    targetOrigin: 'https://www.figma.com',  // * for local testing, less secure
+    targetOrigin: 'https://www.figma.com', // * for local testing, less secure
     debounceMs: 300, // 300ms debounce to prevent spamming Figma with messages
   });
 
