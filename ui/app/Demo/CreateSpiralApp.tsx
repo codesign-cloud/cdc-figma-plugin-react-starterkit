@@ -1,38 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Demo.css';
-import { useFigmaMessaging } from '../hooks/useFigmaMessaging';
 
-export default function CreateSpiralApp() {
+export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message: any) => void }) {
 
   const [count, setCount] = useState(120);
   const [shape, setShape] = useState<'circle' | 'rectangle' | 'polygon'>('polygon');
-
-  const { sendToFigma, onFigmaMessage } = useFigmaMessaging({
-    targetOrigin: 'https://www.figma.com', // * for local testing, less secure
-    debounceMs: 300, // 300ms debounce to prevent spamming Figma with messages
-  });
 
   const createSpirals = () => {
     sendToFigma({ type: 'demo-create-spiral', count, shape });
     // Equivalent to: parent.postMessage({ pluginMessage: { type: 'demo-create-spiral', count, shape } }, '*');
   };
-
-  useEffect(() => {
-    const removeMessageListener = onFigmaMessage((m) => {
-      switch (m.type) {
-        case 'demo-create-spiral':
-          console.log(`Figma says: ${m.message}`);
-          sendToFigma({ type:'show-notification', message: "Plugin: Figma said spirals have been created"})
-          break;
-        default:
-          console.log(`Unknown message type received from Figma: ${m.type}`);
-      }
-    });
-
-    return removeMessageListener;
-  }, [onFigmaMessage]);
 
   return (
     <div className='text-sm'>

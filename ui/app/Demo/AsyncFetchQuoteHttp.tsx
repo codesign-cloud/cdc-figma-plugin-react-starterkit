@@ -1,19 +1,11 @@
 'use client';
-
 import React, { useState } from 'react';
-
-import { useFigmaMessaging } from '../hooks/useFigmaMessaging';
 import axiosClient from '../utils/axiosClient';
 
-export default function AsyncFetchQuoteHttp() {
+export default function AsyncFetchQuoteHttp({ sendToFigma }: { sendToFigma: (message: any) => void }) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [quote, setQuote] = useState('');
-
-    const { sendToFigma } = useFigmaMessaging({
-        targetOrigin: 'https://www.figma.com', // * for local testing, less secure
-        debounceMs: 300, // 300ms debounce to prevent spamming Figma with messages
-    });
 
     const fetchQuote = async () => {
         setIsLoading(true);
@@ -38,7 +30,7 @@ export default function AsyncFetchQuoteHttp() {
                 {isLoading ? 'Fetching...' : 'Fetch and insert'}
             </button>
             { quote &&
-                <blockquote className="text-gray-500 mt-3 text-sm border-l-4 border-blue-500 pl-4 py-2 rounded-lg">{quote}</blockquote>
+                <blockquote className="text-gray-500 mt-3 text-xs border-l-4 border-blue-500 pl-4 py-2 rounded-lg">{quote}</blockquote>
             }
         </div>
     );

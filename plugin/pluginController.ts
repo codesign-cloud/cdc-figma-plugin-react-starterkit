@@ -1,7 +1,7 @@
 /* Config */
 import { PLUGIN_UI_CONFIG as UiConfig } from './config';
 /* Helpers */
-import { notifyConfigDefault, roundToDecimals } from './helpers/helpers';
+import { getNodeProps, notifyConfigDefault } from './helpers/helpers';
 /* Demo */
 import { createColorfulSpiral } from './demo/spiralGenerator';
 
@@ -17,6 +17,7 @@ figma.ui.onmessage = (msg) => {
       figma.viewport.scrollAndZoomIntoView(nodes);
       figma.ui.postMessage({
         type: 'demo-create-spiral',
+        origin: 'figma',
         message: `Created a spiral with ${msg.count} ${msg.shape}s`,
       });
       figma.notify("Figma: Created spiral", notifyConfigDefault);
@@ -46,6 +47,35 @@ figma.ui.onmessage = (msg) => {
       break;
     /* /DEMO */
 
+    case 'get-selection-contents-deep':
+      const frameContents = figma.currentPage.selection
+        .filter(node => node.type === 'FRAME')
+        .flatMap(frame => {
+          const processedNodes = new Set();
+          const getChildrenRecursively = (node: SceneNode): any[] => {
+            if (processedNodes.has(node.id)) {
+              return [];
+            }
+            processedNodes.add(node.id);
+            const nodeProps = getNodeProps(node, 'basic', frame.id);
+            if ('children' in node) {
+              return [
+                nodeProps,
+                ...node.children.flatMap(getChildrenRecursively),
+              ];
+            }
+            return [nodeProps];
+          };
+          return getChildrenRecursively(frame).slice(1); // Exclude the frame itself
+        });
+      console.log(frameContents);
+      figma.ui.postMessage({
+        type: 'get-selection-contents-deep',
+        origin: 'figma',
+        message: frameContents,
+      });
+      break;
+
     case 'show-notification':
       if (msg.message) {
         figma.notify(msg.message, notifyConfigDefault);
@@ -56,7 +86,6 @@ figma.ui.onmessage = (msg) => {
       console.error('Received unknown message type:', msg.type);
       alert(`Received unknown message type: ${msg.type}`);
       break;
-
   }
 };
 
@@ -65,20 +94,12 @@ figma.ui.onmessage = (msg) => {
 // DOCS: https://www.figma.com/plugin-docs/api/properties/figma-on/
 figma.on('selectionchange', () => {
   const selection = figma.currentPage.selection;
+  console.log('selection', selection);
   const nodeCount = selection.length;
-  const nodeData = selection.map(node => ({
-    id: node.id,
-    type: node.type,
-    name: node.name,
-    width: roundToDecimals(node.width),
-    height: roundToDecimals(node.height),
-    x: roundToDecimals(node.x, 3),
-    y: roundToDecimals(node.y, 3),
-    rotation: 'rotation' in node ? roundToDecimals(node.rotation) : undefined,
-    opacity: 'opacity' in node ? roundToDecimals(node.opacity) : undefined,
-  }));
+  const nodeData = selection.map(node => getNodeProps(node, 'full'));
   figma.ui.postMessage({
     type: 'selectionchange',
+    origin: 'figma',
     message: `Selected ${nodeCount} nodes`,
     data: {
       count: nodeCount,
