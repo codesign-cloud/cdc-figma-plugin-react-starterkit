@@ -1,7 +1,7 @@
 /* Config */
 import { PLUGIN_UI_CONFIG as UiConfig } from './config';
 /* Helpers */
-import { getNodeProps, notifyConfigDefault } from './helpers/helpers';
+import { getNodeProps, notifyConfigDevDefault } from './helpers/helpers';
 /* Demo */
 import { createColorfulSpiral } from './demo/spiralGenerator';
 
@@ -20,7 +20,7 @@ figma.ui.onmessage = (msg) => {
         origin: 'figma',
         message: `Created a spiral with ${msg.count} ${msg.shape}s`,
       });
-      figma.notify("Figma: Created spiral", notifyConfigDefault);
+      figma.notify("Figma: Created spiral", notifyConfigDevDefault);
       break;
     case 'demo-insert-quote':
       let quote = msg.quote ?? '';
@@ -38,7 +38,7 @@ figma.ui.onmessage = (msg) => {
           figma.currentPage.appendChild(textNode);
           figma.currentPage.selection = [textNode];
           figma.viewport.scrollAndZoomIntoView([textNode]);
-          figma.notify("Figma: Inserted quote", notifyConfigDefault);
+          figma.notify("Figma: Inserted quote", notifyConfigDevDefault);
         })
         .catch(err => {
           console.error("Failed to load font:", err);
@@ -47,7 +47,12 @@ figma.ui.onmessage = (msg) => {
       break;
     /* /DEMO */
 
-    case 'get-selection-contents-deep':
+    case 'get-frame-contents-deep':
+      /* check if selection has at least one frame */
+      if (!figma.currentPage.selection.some(node => node.type === 'FRAME')) {
+        figma.notify("Figma: No frame selected", notifyConfigDevDefault);  
+        break;
+      }
       const frameContents = figma.currentPage.selection
         .filter(node => node.type === 'FRAME')
         .flatMap(frame => {
@@ -71,7 +76,7 @@ figma.ui.onmessage = (msg) => {
       console.log(frameContents);
       figma.notify("Figma: Selection contents sent. Check console for details.");
       figma.ui.postMessage({
-        type: 'get-selection-contents-deep',
+        type: 'get-frame-contents-deep',
         origin: 'figma',
         message: frameContents,
       });
@@ -79,7 +84,7 @@ figma.ui.onmessage = (msg) => {
 
     case 'show-notification':
       if (msg.message) {
-        figma.notify(msg.message, notifyConfigDefault);
+        figma.notify(msg.message, notifyConfigDevDefault);
       }
       break;
 

@@ -33,4 +33,4 @@ export function roundToDecimals(value: number | string, decimals: number = 2): n
 }
 
 
-export const notifyConfigDefault = { timeout: 3000, error: false, button: { text: "OK", action: () => console.log("Notification closed") } };
+export const notifyConfigDevDefault = { timeout: 3000, error: false, button: { text: "OK", action: () => console.log("Notification closed") } };
