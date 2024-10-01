@@ -50,18 +50,54 @@ Code updates are dynamically reflected through hot-reload
 
 ##### Making HTTP requests
 
-This project includes Axios to make HTTP calls from the React UI App. Use the pre-configured Axios client from `ui/app/utils/axiosClient.ts` to make requests.
+
+This project includes Axios to make HTTP calls from the React UI App. The pre-configured Axios client in `ui/app/utils/axiosClient.ts` allows users to make quick API calls with minimal setup. 
 
 Remember to add any new domains you want to make requests to in the `manifest.json` file under `networkAccess.allowedDomains`.
 
+`````js
+import axiosClient from '../utils/axiosClient';
+..
+....
+    const response = await axiosClient.get('https://dummyjson.com/quotes/random');
+    const data = response.data;
+`````
+
+
+
+ ### Folder Structure
+
+Figma plugins typically follow a specific structure to separate concerns and facilitate development. The main components are the UI (user interface) and the plugin controller, which interacts with the Figma API. The `manifest.json` file in the root directory defines the plugin's metadata, permissions, and entry points.
+
+- The `/ui` directory contains the plugin's user interface (React app). This includes components, styles, and logic for the visual part of the plugin that users interact with. `/ui/app/hooks` and `/ui/app/utils` have reusable hooks and utility functions.
+
+- The `/plugin` directory contains the Figma controller. This is where the core plugin logic resides, including interactions with the Figma API, document manipulation, and communication with the UI. The `/plugin/helpers` has resuable code.
 
 
 
 
+### React Helpers
 
+The `useFigmaMessaging` hook simplifies communication between your React app and Figma.
 
+`````js
+  const { sendToFigma, onFigmaMessage } = useFigmaMessaging({
+    targetOrigin: 'https://www.figma.com', // * may be used for local testing, less secure
+    debounceMs: 300, // debounce; to prevent spamming Figma with messages
+  });
+``````
 
- ## Folder Structure
-
-- The `/ui` directory contains the React code for the plugin's user interface.
-- The `/plugin` directory contains the Figma controller
+````js
+    // Example
+    sendToFigma({ type: 'FETCH_DATA' });
+    // Implement 'FETCH_DATA' handling in pluginController.ts > figma.ui.onmessage
+    ..
+    ...
+    // Handling messages sent from the Plugin
+    onFigmaMessage((msg) => {
+        if (msg.type === 'FETCH_DATA_RESPONSE') {
+            console.log('Received data from Figma:', msg.data);
+        }
+    });
+````
+This setup allows you to easily send messages to Figma and handle responses.
