@@ -1,5 +1,6 @@
 
-export function createColorfulSpiral(count: number, shape: 'circle' | 'rectangle' | 'polygon') {
+export function createColorfulSpiral(count: number, shape: 'circle' | 'rectangle' | 'polygon' | 'star' | 'triangle') {
+
     const nodes = [];
     const centerX = figma.viewport.center.x;
     const centerY = figma.viewport.center.y;
@@ -18,6 +19,14 @@ export function createColorfulSpiral(count: number, shape: 'circle' | 'rectangle
             case 'polygon':
                 node = figma.createPolygon();
                 (node as PolygonNode).pointCount = 6;
+                break;
+            case 'star':
+                node = figma.createStar();
+                (node as StarNode).pointCount = 5;
+                break;
+            case 'triangle':
+                node = figma.createPolygon();
+                (node as PolygonNode).pointCount = 3;
                 break;
         }
 
@@ -39,6 +48,7 @@ export function createColorfulSpiral(count: number, shape: 'circle' | 'rectangle
     return nodes;
 }
 
+// Convert HSL color to RGB
 function HSLToRGB(h: number, s: number, l: number) {
     s /= 100;
     l /= 100;
