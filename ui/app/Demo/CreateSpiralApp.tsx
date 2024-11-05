@@ -6,7 +6,7 @@ import './Demo.css';
 export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message: any) => void }) {
 
   const [count, setCount] = useState(120);
-  const [shape, setShape] = useState<'circle' | 'rectangle' | 'polygon'>('polygon');
+  const [shape, setShape] = useState<'circle' | 'rectangle' | 'polygon' | 'star' | 'triangle'>('polygon');
 
   const createSpirals = () => {
     sendToFigma({ type: 'demo-create-spiral', count, shape });
@@ -45,6 +45,8 @@ export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message
                 <option value="circle">Circle</option>
                 <option value="rectangle">Rectangle</option>
                 <option value="polygon">Polygon</option>
+                <option value="star">Star</option>
+                <option value="triangle">Triangle</option>
               </select>
             </td>
           </tr>
