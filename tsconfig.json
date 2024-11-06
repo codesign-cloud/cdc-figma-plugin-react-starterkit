@@ -14,6 +14,7 @@
         "allowSyntheticDefaultImports": true,
         "removeComments": true,
         "noImplicitAny": true,
+        "resolveJsonModule": true,
         "typeRoots": [
             "./node_modules/@types",
             "./node_modules/@figma"
