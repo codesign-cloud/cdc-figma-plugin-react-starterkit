@@ -2,9 +2,9 @@
     "compilerOptions": {
         "target": "es6",
         "outDir": "dist",
-        "jsx": "react",
+        "jsx": "react-jsx",
         "esModuleInterop": true,
-        "lib": ["dom","dom.iterable","esnext"],
+        "lib": ["dom", "dom.iterable", "es6"],
         "module": "esnext",
         "moduleResolution": "node",
         "strict": true,
@@ -15,6 +15,11 @@
         "removeComments": true,
         "noImplicitAny": true,
         "resolveJsonModule": true,
+        "allowImportingTsExtensions": false,
+        "noEmit": false,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
         "typeRoots": [
             "./node_modules/@types",
             "./node_modules/@figma"

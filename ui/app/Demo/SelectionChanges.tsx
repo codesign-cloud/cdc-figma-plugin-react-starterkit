@@ -1,5 +1,3 @@
-'use client';
-import React from 'react';
 
 export default function SelectionChanges({ sendToFigma, figmaSelectedNodeCount: fsnc }: { sendToFigma: (message: any) => void, figmaSelectedNodeCount: number }) {
     return (

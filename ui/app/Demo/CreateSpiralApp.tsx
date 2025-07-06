@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Demo.css';
 
 export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message: any) => void }) {

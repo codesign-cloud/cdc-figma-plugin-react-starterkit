@@ -1,5 +1,4 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFigmaMessaging, FigmaMessage } from './hooks/useFigmaMessaging';
 import CreateSpiralApp from "./Demo/CreateSpiralApp";
 import SelectionChanges from "./Demo/SelectionChanges";
