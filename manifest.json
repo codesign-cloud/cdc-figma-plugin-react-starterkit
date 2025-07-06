@@ -13,7 +13,8 @@
   ],
   "networkAccess": {
     "allowedDomains": [
-      "https://dummyjson.com",
+      "https://api.allorigins.win",
+      "https://zenquotes.io",
       "https://www.figma.com"
     ]
   }

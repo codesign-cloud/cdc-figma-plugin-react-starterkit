@@ -1,6 +1,6 @@
 # CDC Figma Plugin React Starter Kit
 
- A starter kit for building Figma plugins with React & TypeScript. Includes boilerplate code and essential config for quick Figma plugin development. 
+ A starter kit for building Figma plugins with React & TypeScript. Includes boilerplate code and essential config for quick Figma plugin development.
 
 
  ### Getting Started
@@ -59,7 +59,7 @@ Remember to add any new domains you want to make requests to in the `manifest.js
 import axiosClient from '../utils/axiosClient';
 ..
 ....
-    const response = await axiosClient.get('https://dummyjson.com/quotes/random');
+    const response = await axiosClient.get('https://zenquotes.io/api/random');
     const data = response.data;
 `````
 
