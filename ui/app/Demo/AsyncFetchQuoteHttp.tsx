@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import axiosClient from '../utils/axiosClient';
+import type { FigmaMessage } from '../hooks/useFigmaMessaging';
 
-export default function AsyncFetchQuoteHttp({ sendToFigma }: { sendToFigma: (message: any) => void }) {
+export default function AsyncFetchQuoteHttp({ sendToFigma }: { sendToFigma: (message: FigmaMessage) => void }) {
 
     const [isLoading, setIsLoading] = useState(false);
     const [quote, setQuote] = useState('');

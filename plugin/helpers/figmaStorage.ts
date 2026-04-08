@@ -3,7 +3,7 @@
 
 export const storage = {
 
-    async get(key: string): Promise<any> {
+    async get(key: string): Promise<unknown> {
         try {
             const value = await figma.clientStorage.getAsync(key);
             return value;
@@ -13,7 +13,7 @@ export const storage = {
         }
     },
 
-    async set(key: string, value: any): Promise<boolean> {
+    async set(key: string, value: unknown): Promise<boolean> {
         try {
             await figma.clientStorage.setAsync(key, value);
             return true;
@@ -33,11 +33,11 @@ export const storage = {
         }
     },
 
-    async getAll(): Promise<{ [key: string]: any }> {
+    async getAll(): Promise<{ [key: string]: unknown }> {
         try {
             const keys = await figma.clientStorage.keysAsync();
             const values = await Promise.all(keys.map(key => this.get(key)));
-            return keys.reduce<{ [key: string]: any }>((acc, key, index) => {
+            return keys.reduce<{ [key: string]: unknown }>((acc, key, index) => {
                 acc[key] = values[index];
                 return acc;
             }, {});

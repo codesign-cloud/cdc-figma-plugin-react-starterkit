@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import './Demo.css';
+import type { FigmaMessage } from '../hooks/useFigmaMessaging';
 
-export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message: any) => void }) {
+export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message: FigmaMessage) => void }) {
 
   const [count, setCount] = useState(120);
   const [shape, setShape] = useState<'circle' | 'rectangle' | 'polygon' | 'star' | 'triangle'>('polygon');
@@ -37,7 +38,7 @@ export default function CreateSpiralApp({ sendToFigma }: { sendToFigma: (message
               <select
                 title="Shape"
                 value={shape}
-                onChange={(e) => setShape(e.target.value as any)}
+                onChange={(e) => setShape(e.target.value as typeof shape)}
                 className="text-md w-full p-1 rounded-md"
               >
                 <option value="circle">Circle</option>
