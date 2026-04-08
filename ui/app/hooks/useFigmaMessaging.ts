@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
 
-export type FigmaMessage<T = unknown | any> = {
+export type FigmaMessage<T = Record<string, unknown>> = {
     type: string;
     message?: string;
     data?: T;

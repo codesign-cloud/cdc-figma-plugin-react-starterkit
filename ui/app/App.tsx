@@ -20,7 +20,7 @@ export default function App() {
         case 'selectionchange':
           console.log(`Figma says: ${message.message}`);
           console.log(`Figma payload: ${JSON.stringify(message.data ?? {})}`);
-          setFigmaSelNodeCount(message.data?.count ?? 0);
+          setFigmaSelNodeCount((message.data?.count as number) ?? 0);
           break;
         case 'demo-create-spiral':
           console.log(`Figma says: ${message.message}`);

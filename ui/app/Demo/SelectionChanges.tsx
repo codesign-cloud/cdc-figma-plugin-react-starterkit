@@ -1,5 +1,6 @@
+import type { FigmaMessage } from '../hooks/useFigmaMessaging';
 
-export default function SelectionChanges({ sendToFigma, figmaSelectedNodeCount: fsnc }: { sendToFigma: (message: any) => void, figmaSelectedNodeCount: number }) {
+export default function SelectionChanges({ sendToFigma, figmaSelectedNodeCount: fsnc }: { sendToFigma: (message: FigmaMessage) => void, figmaSelectedNodeCount: number }) {
     return (
         <div>
             <h3 className="text-md font-bold">Inter-process communication</h3>

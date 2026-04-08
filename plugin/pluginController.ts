@@ -11,7 +11,7 @@ figma.ui.onmessage = (msg) => {
   switch (msg.type) {
 
     /* DEMO */
-    case 'demo-create-spiral':
+    case 'demo-create-spiral': {
       const nodes = createColorfulSpiral(msg.count, msg.shape);
       figma.currentPage.selection = nodes;
       figma.viewport.scrollAndZoomIntoView(nodes);
@@ -22,10 +22,11 @@ figma.ui.onmessage = (msg) => {
       });
       figma.notify("Figma: Created spiral", notifyConfigDevDefault);
       break;
-    case 'demo-insert-quote':
-      let quote = msg.quote ?? '';
+    }
+    case 'demo-insert-quote': {
+      const quote = msg.quote ?? '';
       const viewportCenter = figma.viewport.center;
-      let textNode = figma.createText();
+      const textNode = figma.createText();
       textNode.x = viewportCenter.x;
       textNode.y = viewportCenter.y;
       figma.viewport.scrollAndZoomIntoView([textNode]);
@@ -45,19 +46,20 @@ figma.ui.onmessage = (msg) => {
           figma.notify("Error: Failed to load font async", { error: true });
         });
       break;
+    }
     /* /DEMO */
 
-    case 'get-frame-contents-deep':
+    case 'get-frame-contents-deep': {
       /* check if selection has at least one frame */
       if (!figma.currentPage.selection.some(node => node.type === 'FRAME')) {
-        figma.notify("Figma: No frame selected", notifyConfigDevDefault);  
+        figma.notify("Figma: No frame selected", notifyConfigDevDefault);
         break;
       }
       const frameContents = figma.currentPage.selection
         .filter(node => node.type === 'FRAME')
         .flatMap(frame => {
-          const processedNodes = new Set();
-          const getChildrenRecursively = (node: SceneNode): any[] => {
+          const processedNodes = new Set<string>();
+          const getChildrenRecursively = (node: SceneNode): ReturnType<typeof getNodeProps>[] => {
             if (processedNodes.has(node.id)) {
               return [];
             }
@@ -81,6 +83,7 @@ figma.ui.onmessage = (msg) => {
         message: frameContents,
       });
       break;
+    }
 
     case 'show-notification':
       if (msg.message) {
